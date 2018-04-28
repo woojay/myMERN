@@ -7,7 +7,12 @@ const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
 const posts = require('./routes/api/posts');
 
+// Passport
+const passport = require('passport');
+
 const app = express();
+
+// MWs
 
 // Body Parser MW
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -24,6 +29,11 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+// Passport MW
+app.use(passport.initialize());
+
+require('./config/passport.js')(passport);
 
 app.get('/', (req, res) => {
   res.send('<h1>hey!!!..</h1>');
