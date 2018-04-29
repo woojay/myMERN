@@ -33,7 +33,7 @@ mongoose
 // Passport MW
 app.use(passport.initialize());
 
-require('./config/passport.js')(passport);
+require('./config/passport')(passport);
 
 app.get('/', (req, res) => {
   res.send('<h1>hey!!!..</h1>');
