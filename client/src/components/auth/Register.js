@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios';
 
 class Register extends Component {
 
@@ -9,9 +10,7 @@ class Register extends Component {
       email: '',
       password: '',
       password2: '',
-      errors: {
-
-      }
+      errors: {}
     };
 
     this.onChange = this.onChange.bind(this);
@@ -30,8 +29,15 @@ class Register extends Component {
       email: this.state.email,
       password: this.state.password,
       password2: this.state.password2
-    }
+    };
+
+    axios.post('/api/users/register', newUser)
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err.response.data));
+
   }
+
+
   render() {
     return (
       <div className="register">
