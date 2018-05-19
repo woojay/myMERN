@@ -1,4 +1,6 @@
-
+import isEmpty from '../validation/is-empty';
+import { SET_CURRENT_USER } from '../actions/types';
+import { SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS } from 'constants';
 
 const initialState = {
   isAuthenticated: false,
@@ -12,6 +14,12 @@ export default function (state = initialState, action) {
     //     ...state,
     //     user: action.payload
     //   }
+    case SET_CURRENT_USER:
+      return {
+        ...state,
+        isAuthenticated: !isEmpty(action.payload),
+        user: action.payload
+      }
     default:
       return state;
   }
