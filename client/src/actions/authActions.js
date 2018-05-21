@@ -15,11 +15,12 @@ export const registerUser = (userData, history) => dispatch => {
         payload: err.response.data
       })
     );
-}
+};
 
 // Login  - Get User token
 export const loginUser = (userData) => dispatch => {
-  axios.post('/app/users/login', userData)
+  axios
+    .post('/api/users/login', userData)
     .then(res => {
       // save to local storage
       const { token } = res.data;
@@ -30,7 +31,7 @@ export const loginUser = (userData) => dispatch => {
       // decode token
       const decoded = jwt_decode(token);
       // set ccurrent user
-      dispatch(setCurrentuUser(decoded));
+      dispatch(setCurrentUser(decoded));
 
     })
     .catch(err => {
@@ -42,7 +43,7 @@ export const loginUser = (userData) => dispatch => {
 }
 
 // set logged in user
-export const setCurrentuUser = (decoded) => {
+export const setCurrentUser = (decoded) => {
   return {
     type: SET_CURRENT_USER,
     payload: decoded
